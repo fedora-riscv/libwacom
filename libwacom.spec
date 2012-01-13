@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 
 Group:          System Environment/Libraries
@@ -70,5 +70,8 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Mon Dec 19 2011 Peter Hutterer <peter.hutterer@redhat.com> 0.1-1
 - Initial import (#768800)
