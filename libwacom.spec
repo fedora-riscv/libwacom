@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        0.2
+Version:        0.3
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 
@@ -70,6 +70,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Tue Feb  7 2012 Matthias Clasen <mclasen@redhat.com> - 0.3-1
+- Update to 0.3
+
 * Tue Jan 17 2012 Matthias Clasen <mclasen@redhat.com> - 0.2-1
 - Update to 0.2
 
