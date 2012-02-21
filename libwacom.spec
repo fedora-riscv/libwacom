@@ -7,7 +7,7 @@ Group:          System Environment/Libraries
 License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
-Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.xz
+Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -70,6 +70,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Tue Feb 21 2012 Peter Hutterer <peter.hutterer@redhat.com>
+- Source file is .bz2, not .xz
+
 * Tue Feb  7 2012 Matthias Clasen <mclasen@redhat.com> - 0.3-1
 - Update to 0.3
 
