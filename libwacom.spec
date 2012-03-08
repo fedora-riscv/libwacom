@@ -1,13 +1,19 @@
 Name:           libwacom
 Version:        0.3
-Release:        1%{?dist}
+Release:        5%{?dist}
 Summary:        Tablet Information Client Library
+Requires:       %{name}-data
 
 Group:          System Environment/Libraries
 License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+Source1:        libwacom.rules
+
+Patch01:        libwacom-0.3-add-list-devices.patch
+Patch02:        libwacom-0.3-add-udev-generator.patch
+Patch03:        libwacom-0.3-add-bamboo-one.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -27,6 +33,7 @@ Tablet information client library library development package.
 
 %package data
 Summary:        Tablet Information Client Library Library Data Files
+BuildArch:      noarch
 
 %description data
 Tablet information client library library data files.
@@ -34,13 +41,19 @@ Tablet information client library library data files.
 %prep
 %setup -q -n %{name}-%{version}
 
+%patch01 -p1
+%patch02 -p1
+%patch03 -p1
+
 %build
-autoreconf -v --install || exit 1
+autoreconf --force -v --install || exit 1
 %configure --disable-static
 make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
+install -d ${RPM_BUILD_ROOT}/lib/udev/rules.d
+install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/lib/udev/rules.d/65-libwacom.rules
 
 # We intentionally don't ship *.la files
 rm -f %{buildroot}%{_libdir}/*.la
@@ -52,6 +65,7 @@ rm -f %{buildroot}%{_libdir}/*.la
 %defattr(-,root,root,-)
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
+/lib/udev/rules.d/65-libwacom.rules
 
 %files devel
 %defattr(-,root,root,-)
@@ -70,6 +84,19 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Thu Mar 08 2012 Olivier Fourdan <ofourdan@redhat.com> 0.3-5
+- Mark data subpackage as noarch and make it a requirement for libwacom
+- Use generated udev rule file to list only known devices from libwacom
+  database
+
+* Tue Mar 06 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.3-4
+- libwacom-0.3-add-list-devices.patch: add API to list devices
+- libwacom-0.3-add-udev-generator.patch: add a udev rules generater tool
+- libwacom-0.3-add-bamboo-one.patch: add Bamboo One definition
+
+* Tue Feb 21 2012 Olivier Fourdan <ofourdan@redhat.com> - 0.3-2
+- Add udev rules to identify Wacom as tablets for libwacom
+
 * Tue Feb 21 2012 Peter Hutterer <peter.hutterer@redhat.com>
 - Source file is .bz2, not .xz
 
