@@ -77,7 +77,7 @@ index 0000000..de3986f
 +    static char *touchpad;
 +
 +    if (has_touch)
-+        touchpad = ", ID_INPUT_TOUCHPAD=\"1\"";
++        touchpad = ", ENV{ID_INPUT_TOUCHPAD}=\"1\"";
 +    else
 +        touchpad = "";
 +

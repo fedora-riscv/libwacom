@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.3
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -84,6 +84,10 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Thu Mar 22 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.3-6
+- Fix udev rules generator patch to apply ENV{ID_INPUT_TOUCHPAD} correctly
+  (#803314)
+
 * Thu Mar 08 2012 Olivier Fourdan <ofourdan@redhat.com> 0.3-5
 - Mark data subpackage as noarch and make it a requirement for libwacom
 - Use generated udev rule file to list only known devices from libwacom
