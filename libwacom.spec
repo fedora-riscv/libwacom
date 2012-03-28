@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.3
-Release:        6%{?dist}
+Version:        0.4
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -10,10 +10,6 @@ URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 Source1:        libwacom.rules
-
-Patch01:        libwacom-0.3-add-list-devices.patch
-Patch02:        libwacom-0.3-add-udev-generator.patch
-Patch03:        libwacom-0.3-add-bamboo-one.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -40,10 +36,6 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
-
-%patch01 -p1
-%patch02 -p1
-%patch03 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -84,6 +76,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Tue Mar 27 2012 Matthias Clasen <mclasen@redhat.com> 0.4-1
+- Update to 0.4
+
 * Thu Mar 22 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.3-6
 - Fix udev rules generator patch to apply ENV{ID_INPUT_TOUCHPAD} correctly
   (#803314)
