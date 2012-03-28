@@ -8,7 +8,7 @@ Group:          System Environment/Libraries
 License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
-Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.xz
 Source1:        libwacom.rules
 
 BuildRequires:  autoconf automake libtool doxygen
