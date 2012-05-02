@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -10,6 +10,10 @@ URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 Source1:        libwacom.rules
+
+Patch01:        0001-data-add-generic-eraser-to-Bamboo-Pen-Touch.patch
+Patch02:        0001-lib-Fix-generic-stylus-missing-an-eraser.patch
+Patch03:        0001-tools-add-missing-linker-flags-for-list-local-device.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -36,6 +40,9 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch01 -p1
+%patch02 -p1
+%patch03 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -77,6 +84,10 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Thu May 03 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.5-2
+- Fix gnome-control-center crash for Bamboo Pen & Touch
+- Generic styli needs to have erasers, default to two tools.
+
 * Wed May 02 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.5-1
 - Update to 0.5
 - Fix sources again - as long as Source0 points to sourceforge this is a bz2
