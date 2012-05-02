@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        0.4
+Version:        0.5
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -8,7 +8,7 @@ Group:          System Environment/Libraries
 License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
-Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.xz
+Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 Source1:        libwacom.rules
 
 BuildRequires:  autoconf automake libtool doxygen
@@ -58,6 +58,7 @@ rm -f %{buildroot}%{_libdir}/*.la
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
 /lib/udev/rules.d/65-libwacom.rules
+%{_bindir}/libwacom-list-local-devices
 
 %files devel
 %defattr(-,root,root,-)
@@ -76,6 +77,10 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Wed May 02 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.5-1
+- Update to 0.5
+- Fix sources again - as long as Source0 points to sourceforge this is a bz2
+
 * Tue Mar 27 2012 Matthias Clasen <mclasen@redhat.com> 0.4-1
 - Update to 0.4
 
