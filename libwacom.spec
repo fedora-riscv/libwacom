@@ -1,6 +1,7 @@
 Name:           libwacom
-Version:        0.5
-Release:        3%{?dist}
+
+Version:        0.6.1
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -10,12 +11,6 @@ URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 Source1:        libwacom.rules
-
-Patch01:        0001-data-add-generic-eraser-to-Bamboo-Pen-Touch.patch
-Patch02:        0001-lib-Fix-generic-stylus-missing-an-eraser.patch
-Patch03:        0001-tools-add-missing-linker-flags-for-list-local-device.patch
-Patch04:        0001-lib-fix-an-error-message.patch
-Patch05:        0001-lib-serial-devices-may-end-up-with-a-NULL-product_st.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -42,11 +37,6 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch01 -p1
-%patch02 -p1
-%patch03 -p1
-%patch04 -p1
-%patch05 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -55,8 +45,8 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
-install -d ${RPM_BUILD_ROOT}/lib/udev/rules.d
-install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/lib/udev/rules.d/65-libwacom.rules
+install -d ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d
+install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d/65-libwacom.rules
 
 # We intentionally don't ship *.la files
 rm -f %{buildroot}%{_libdir}/*.la
@@ -65,14 +55,12 @@ rm -f %{buildroot}%{_libdir}/*.la
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
-/lib/udev/rules.d/65-libwacom.rules
+%{_libdir}/udev/rules.d/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING
 %dir %{_includedir}/libwacom-1.0/
 %dir %{_includedir}/libwacom-1.0/libwacom
@@ -81,13 +69,15 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_libdir}/pkgconfig/libwacom.pc
 
 %files data
-%defattr(-,root,root,-)
 %doc COPYING
 %dir %{_datadir}/libwacom
 %{_datadir}/libwacom/*.tablet
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Fri Nov 30 2012 Bastien Nocera <bnocera@redhat.com> 0.6.1-1
+- Update to 0.6.1
+
 * Tue May 08 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.5-3
 - Fix crash with WACf* serial devices (if not inputattach'd) (#819191)
 
