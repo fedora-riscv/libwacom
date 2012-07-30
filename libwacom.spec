@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.6
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -44,8 +44,8 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
-install -d ${RPM_BUILD_ROOT}/lib/udev/rules.d
-install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/lib/udev/rules.d/65-libwacom.rules
+install -d ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d
+install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d/65-libwacom.rules
 
 # We intentionally don't ship *.la files
 rm -f %{buildroot}%{_libdir}/*.la
@@ -77,6 +77,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-4
+- ... and install the rules in %libdir
+
 * Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-3
 - udev rules can go into %libdir now
 
