@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -57,7 +57,7 @@ rm -f %{buildroot}%{_libdir}/*.la
 %defattr(-,root,root,-)
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
-/lib/udev/rules.d/65-libwacom.rules
+%{_libdir}/udev/rules.d/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
@@ -77,6 +77,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-3
+- udev rules can go into %libdir now
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
