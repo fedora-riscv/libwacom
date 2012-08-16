@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -54,14 +54,12 @@ rm -f %{buildroot}%{_libdir}/*.la
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
 %{_libdir}/udev/rules.d/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING
 %dir %{_includedir}/libwacom-1.0/
 %dir %{_includedir}/libwacom-1.0/libwacom
@@ -70,13 +68,15 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_libdir}/pkgconfig/libwacom.pc
 
 %files data
-%defattr(-,root,root,-)
 %doc COPYING
 %dir %{_datadir}/libwacom
 %{_datadir}/libwacom/*.tablet
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Fri Aug 17 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-5
+- remove %defattr, not necessary anymore
+
 * Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-4
 - ... and install the rules in %libdir
 
