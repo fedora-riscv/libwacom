@@ -1,6 +1,7 @@
 Name:           libwacom
-Version:        0.6
-Release:        5%{?dist}
+
+Version:        0.6.1
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -74,6 +75,10 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/*.stylus
 
 %changelog
+* Fri Nov 09 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6.1-1
+- libwacom 0.6.1
+- update udev.rules files for new tablet descriptions
+
 * Fri Aug 17 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-5
 - remove %defattr, not necessary anymore
 
