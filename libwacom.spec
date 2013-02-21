@@ -1,7 +1,9 @@
+%global udevdir %(pkg-config --variable=udevdir udev)
+
 Name:           libwacom
 
 Version:        0.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -14,6 +16,7 @@ Source1:        libwacom.rules
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
+BuildRequires:  systemd-devel
 
 %description
 %{name} is a library that provides information about Wacom tablets and
@@ -45,8 +48,8 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
-install -d ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d
-install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/%{_libdir}/udev/rules.d/65-libwacom.rules
+install -d ${RPM_BUILD_ROOT}/%{udevdir}/rules.d
+install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/%{udevdir}/rules.d/65-libwacom.rules
 
 # We intentionally don't ship *.la files
 rm -f %{buildroot}%{_libdir}/*.la
@@ -57,7 +60,7 @@ rm -f %{buildroot}%{_libdir}/*.la
 %files
 %doc COPYING README 
 %{_libdir}/libwacom.so.*
-%{_libdir}/udev/rules.d/65-libwacom.rules
+%{udevdir}/rules.d/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
@@ -77,6 +80,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Feb 22 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.7-3
+- Install into correct udev rules directory (#913723)
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
