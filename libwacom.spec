@@ -3,7 +3,7 @@
 Name:           libwacom
 
 Version:        0.7.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -46,7 +46,7 @@ Tablet information client library library data files.
 
 %build
 autoreconf --force -v --install || exit 1
-%configure --disable-static
+%configure --disable-static --disable-silent-rules
 make %{?_smp_mflags}
 
 %install
@@ -83,6 +83,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Jul 11 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.7.1-3
+- Disable silent rules
+
 * Wed May 01 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.7.1-2
 - Use stdout, not stdin for printing
 
