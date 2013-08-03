@@ -3,7 +3,7 @@
 Name:           libwacom
 
 Version:        0.7.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -83,6 +83,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Thu Jul 11 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.7.1-3
 - Disable silent rules
 
