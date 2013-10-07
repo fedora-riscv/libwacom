@@ -1,9 +1,8 @@
 %global udevdir %(pkg-config --variable=udevdir udev)
 
 Name:           libwacom
-
-Version:        0.7.1
-Release:        4%{?dist}
+Version:        0.8
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -13,8 +12,6 @@ URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
 Source1:        libwacom.rules
-
-Patch01:        0001-tools-use-stdout-for-printing-not-stdin.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -42,7 +39,6 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch01 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -83,6 +79,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Oct 07 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.8-1
+- libwacom 0.8
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
