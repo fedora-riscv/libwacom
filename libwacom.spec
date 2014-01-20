@@ -2,7 +2,7 @@
 
 Name:           libwacom
 Version:        0.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -79,6 +79,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Jan 20 2014 Peter Hutterer <peter.hutterer@redhat.com> - 0.8-2
+- Update rules file to current database
+
 * Mon Oct 07 2013 Peter Hutterer <peter.hutterer@redhat.com> 0.8-1
 - libwacom 0.8
 
