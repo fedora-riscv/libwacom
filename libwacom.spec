@@ -2,7 +2,7 @@
 
 Name:           libwacom
 Version:        0.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -11,7 +11,6 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
-Source1:        libwacom.rules
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -48,7 +47,10 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
 install -d ${RPM_BUILD_ROOT}/%{udevdir}/rules.d
-install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}/%{udevdir}/rules.d/65-libwacom.rules
+# auto-generate the udev rule from the database entries
+pushd tools
+./generate-udev-rules > ${RPM_BUILD_ROOT}/%{udevdir}/rules.d/65-libwacom.rules
+popd
 
 # We intentionally don't ship *.la files
 rm -f %{buildroot}%{_libdir}/*.la
@@ -79,6 +81,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Mar 20 2014 Peter Hutterer <peter.hutterer@redhat.com> 0.9-2
+- Generate the rules file from the database
+
 * Tue Mar 04 2014 Peter Hutterer <peter.hutterer@redhat.com> 0.9-1
 - libwacom 0.9
 
