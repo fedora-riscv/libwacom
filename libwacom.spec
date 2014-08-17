@@ -2,7 +2,7 @@
 
 Name:           libwacom
 Version:        0.9
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -81,6 +81,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
