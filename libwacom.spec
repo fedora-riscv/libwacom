@@ -2,7 +2,7 @@
 
 Name:           libwacom
 Version:        0.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -11,6 +11,8 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+
+Patch01:        0001-tools-don-t-label-integrated-tablets-as-touchpads.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -38,6 +40,7 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch01 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -81,6 +84,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Apr 21 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.13-2
+- Don't label touchscreens as touchpads (#1208685)
+
 * Mon Apr 20 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.13-1
 - libwacom 0.13
 

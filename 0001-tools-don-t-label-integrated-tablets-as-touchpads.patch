@@ -1,0 +1,35 @@
+From 7be498c17968261abadcc59a2d0dd9da2e70c629 Mon Sep 17 00:00:00 2001
+From: Peter Hutterer <peter.hutterer@who-t.net>
+Date: Tue, 21 Apr 2015 10:39:55 +1000
+Subject: [PATCH libwacom] tools: don't label integrated tablets as touchpads
+
+If it's display- or system-integrated it can only be a touchscreen.
+
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+Tested-by: Benjamin Tissoires <benjamin.tissoires@gmail.com>
+---
+ tools/generate-udev-rules.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/tools/generate-udev-rules.c b/tools/generate-udev-rules.c
+index ff95e60..d6769bd 100644
+--- a/tools/generate-udev-rules.c
++++ b/tools/generate-udev-rules.c
+@@ -83,8 +83,12 @@ static void print_udev_entry_for_match (WacomDevice *device, const WacomMatch *m
+ 	/* unset joystick, set tablet */
+ 	printf ("%s ENV{ID_INPUT}=\"1\", ENV{ID_INPUT_JOYSTICK}=\"\", ENV{ID_INPUT_TABLET}=\"1\"\n", matchstr);
+ 
+-	if (libwacom_has_touch (device))
+-		printf( "ATTRS{name}==\"* Finger\", %s ENV{ID_INPUT_TOUCHPAD}=\"1\"\n", matchstr);
++	if (libwacom_has_touch (device)) {
++		const char *touchtype = "ID_INPUT_TOUCHPAD";
++		if (libwacom_get_integration_flags (device) != WACOM_DEVICE_INTEGRATED_NONE)
++			touchtype = "ID_INPUT_TOUCHSCREEN";
++		printf( "ATTRS{name}==\"* Finger\", %s ENV{%s}=\"1\"\n", matchstr, touchtype);
++	}
+ 
+ 	/* set ID_INPUT_TABLET_PAD for pads */
+ 	if (libwacom_get_num_buttons (device) > 0)
+-- 
+2.3.5
+
