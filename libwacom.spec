@@ -2,7 +2,7 @@
 
 Name:           libwacom
 Version:        0.13
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -84,6 +84,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.13-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Tue Apr 21 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.13-2
 - Don't label touchscreens as touchpads (#1208685)
 
