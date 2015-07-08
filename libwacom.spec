@@ -1,8 +1,8 @@
 %global udevdir %(pkg-config --variable=udevdir udev)
 
 Name:           libwacom
-Version:        0.13
-Release:        3%{?dist}
+Version:        0.15
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -11,8 +11,6 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
-
-Patch01:        0001-tools-don-t-label-integrated-tablets-as-touchpads.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -40,7 +38,6 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch01 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -84,6 +81,9 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Jul 08 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.15-1
+- libwacom 0.15
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.13-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
