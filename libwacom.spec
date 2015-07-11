@@ -1,8 +1,6 @@
-%global udevdir %(pkg-config --variable=udevdir udev)
-
 Name:           libwacom
 Version:        0.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -14,7 +12,7 @@ Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
-BuildRequires:  systemd-devel
+BuildRequires:  systemd systemd-devel
 
 %description
 %{name} is a library that provides information about Wacom tablets and
@@ -46,26 +44,26 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
-install -d ${RPM_BUILD_ROOT}/%{udevdir}/rules.d
+install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}/rules.d
 # auto-generate the udev rule from the database entries
 pushd tools
-./generate-udev-rules > ${RPM_BUILD_ROOT}/%{udevdir}/rules.d/65-libwacom.rules
+./generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/rules.d/65-libwacom.rules
 popd
 
 # We intentionally don't ship *.la files
-rm -f %{buildroot}%{_libdir}/*.la
+find %{buildroot} -type f -name "*.la" -delete
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
-%doc COPYING README 
+%license COPYING
+%doc README
 %{_libdir}/libwacom.so.*
-%{udevdir}/rules.d/65-libwacom.rules
+%{_udevrulesdir}/rules.d/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
-%doc COPYING
 %dir %{_includedir}/libwacom-1.0/
 %dir %{_includedir}/libwacom-1.0/libwacom
 %{_includedir}/libwacom-1.0/libwacom/libwacom.h
@@ -81,6 +79,10 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sat Jul 11 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.15-2
+- Use %%{_udevrulesdir} so rule.d doesn't inadvertantly end up in /
+- Use %%license
+
 * Wed Jul 08 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.15-1
 - libwacom 0.15
 
