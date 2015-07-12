@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.15
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -44,10 +44,10 @@ make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot} INSTALL="install -p"
-install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}/rules.d
+install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 # auto-generate the udev rule from the database entries
 pushd tools
-./generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/rules.d/65-libwacom.rules
+./generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/65-libwacom.rules
 popd
 
 # We intentionally don't ship *.la files
@@ -60,7 +60,7 @@ find %{buildroot} -type f -name "*.la" -delete
 %license COPYING
 %doc README
 %{_libdir}/libwacom.so.*
-%{_udevrulesdir}/rules.d/65-libwacom.rules
+%{_udevrulesdir}/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 
 %files devel
@@ -79,6 +79,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sun Jul 12 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.15-3
+- fix %%{_udevrulesdir} harder
+
 * Sat Jul 11 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.15-2
 - Use %%{_udevrulesdir} so rule.d doesn't inadvertantly end up in /
 - Use %%license
