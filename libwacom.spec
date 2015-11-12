@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.15
-Release:        3%{?dist}
+Version:        0.16
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -79,6 +79,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Nov 13 2015 Peter Hutterer <peter.hutterer@redhat.com> 0.16-1
+- libwacom 0.16
+
 * Sun Jul 12 2015 Peter Robinson <pbrobinson@fedoraproject.org> 0.15-3
 - fix %%{_udevrulesdir} harder
 
