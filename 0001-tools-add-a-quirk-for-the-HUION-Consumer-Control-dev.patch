@@ -1,0 +1,50 @@
+From e8bf80391446e3ff7530dded8612e1ef7211792a Mon Sep 17 00:00:00 2001
+From: Peter Hutterer <peter.hutterer@who-t.net>
+Date: Fri, 1 Apr 2016 10:07:11 +1000
+Subject: [PATCH libwacom] tools: add a quirk for the HUION Consumer Control
+ device in the udev rules
+
+These devices have the same VID/PID as the tablet devices but are effectively
+keyboards. Labelling them as tablets causes a libinput crash (fixed in
+libinput with 1.2.1-5-g5d904b6).
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1314955
+
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+---
+ tools/generate-udev-rules.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/tools/generate-udev-rules.c b/tools/generate-udev-rules.c
+index 338ab82..87d43fe 100644
+--- a/tools/generate-udev-rules.c
++++ b/tools/generate-udev-rules.c
+@@ -52,6 +52,17 @@ static void print_udev_header (void)
+ 	printf ("\n");
+ }
+ 
++static void print_huion_quirk (void)
++{
++	/* Huion tablets have a "consumer control" device with the same
++	 * VID/PID as the tablet but only a few buttons and no axes.
++	 *
++	 */
++	printf("# HUION consumer control devices are not tablets.\n");
++	printf("ATTRS{name}==\"HUION * Consumer Control\", GOTO=\"libwacom_end\"\n");
++	printf ("\n");
++}
++
+ static char * generate_device_match(WacomDevice *device, const WacomMatch *match)
+ {
+ 	WacomBusType type       = libwacom_match_get_bustype (match);
+@@ -208,6 +219,7 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	print_udev_header ();
++	print_huion_quirk ();
+ 	for (p = list; *p; p++)
+ 		print_udev_entry ((WacomDevice *) *p, WBUSTYPE_USB);
+ 
+-- 
+2.5.0
+
