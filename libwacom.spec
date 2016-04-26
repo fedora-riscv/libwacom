@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.18
-Release:        2%{?dist}
+Version:        0.19
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -9,8 +9,6 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
-
-Patch01:        0001-tools-add-a-quirk-for-the-HUION-Consumer-Control-dev.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -38,7 +36,6 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch01 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -82,6 +79,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Apr 26 2016 Peter Hutterer <peter.hutterer@redhat.com> 0.19-1
+- libwacom 0.19
+
 * Fri Apr 01 2016 Peter Hutterer <peter.hutterer@redhat.com> 0.18-2
 - Add a custom quirk for HUION Consumer Control devices (#1314955)
 
