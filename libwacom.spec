@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.22
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -9,6 +9,8 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+
+Patch01:        0001-data-add-ISDV4-5040-Lenovo-X1-Yoga.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -36,6 +38,7 @@ Tablet information client library library data files.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch01 -p1
 
 %build
 autoreconf --force -v --install || exit 1
@@ -79,6 +82,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Nov 11 2016 Peter Hutterer <peter.hutterer@redhat.com> 0.22-2
+- Add Lenovo X1 Yoga data file (#1389849)
+
 * Wed Jul 20 2016 Peter Hutterer <peter.hutterer@redhat.com> 0.22-1
 - libwacom 0.22
 
