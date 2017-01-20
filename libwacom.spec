@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.23
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -79,6 +79,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Jan 20 2017 Peter Hutterer <peter.hutterer@redhat.com> 0.23-2
+- Upload the sources too...
+
 * Fri Jan 20 2017 Peter Hutterer <peter.hutterer@redhat.com> 0.23-1
 - libwacom 0.23
 
