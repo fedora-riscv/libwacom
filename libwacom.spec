@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.26
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -53,6 +53,9 @@ popd
 # We intentionally don't ship *.la files
 find %{buildroot} -type f -name "*.la" -delete
 
+%check
+make %{?_smp_mflags} check
+
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -79,6 +82,9 @@ find %{buildroot} -type f -name "*.la" -delete
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Oct 17 2017 Peter Hutterer <peter.hutterer@redhat.com> 0.26-2
+- run make check as part of the build (#1502637)
+
 *  Fri Aug 25 2017 Peter Hutterer <peter.hutterer@redhat.com> 0.26-1
 - libwacom 0.26
 
