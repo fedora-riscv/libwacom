@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.26
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -56,8 +56,7 @@ find %{buildroot} -type f -name "*.la" -delete
 %check
 make %{?_smp_mflags} check
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files
 %license COPYING
@@ -82,6 +81,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Sat Feb 03 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.26-3
+- Switch to %%ldconfig_scriptlets
+
 * Tue Oct 17 2017 Peter Hutterer <peter.hutterer@redhat.com> 0.26-2
 - run make check as part of the build (#1502637)
 
