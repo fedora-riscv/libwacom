@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.26
-Release:        4%{?dist}
+Version:        0.28
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -13,6 +13,7 @@ Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
 BuildRequires:  systemd systemd-devel
+BuildRequires:  git
 
 %description
 %{name} is a library that provides information about Wacom tablets and
@@ -35,7 +36,7 @@ BuildArch:      noarch
 Tablet information client library library data files.
 
 %prep
-%setup -q -n %{name}-%{version}
+%autosetup -S git
 
 %build
 autoreconf --force -v --install || exit 1
@@ -81,6 +82,10 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Feb 08 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.28-1
+- libwacom 0.28
+- use autosetup
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.26-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
