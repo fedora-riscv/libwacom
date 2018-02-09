@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.28
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -82,6 +82,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.28-2
+- Escape macros in %%changelog
+
 * Thu Feb 08 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.28-1
 - libwacom 0.28
 - use autosetup
@@ -221,13 +224,13 @@ make %{?_smp_mflags} check
 - update udev.rules files for new tablet descriptions
 
 * Fri Aug 17 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-5
-- remove %defattr, not necessary anymore
+- remove %%defattr, not necessary anymore
 
 * Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-4
-- ... and install the rules in %libdir
+- ... and install the rules in %%libdir
 
 * Mon Jul 30 2012 Peter Hutterer <peter.hutterer@redhat.com> 0.6-3
-- udev rules can go into %libdir now
+- udev rules can go into %%libdir now
 
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
