@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.28
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -9,6 +9,8 @@ License:        MIT
 URL:            http://linuxwacom.sourceforge.net
 
 Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+
+Patch01:        0001-data-fix-PairedID-entry-for-the-DTH-2452.patch
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -82,6 +84,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Feb 13 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.28-3
+- Fix PairedID entry causing a debug message in the udev rules
+
 * Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 0.28-2
 - Escape macros in %%changelog
 
