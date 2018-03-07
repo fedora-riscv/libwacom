@@ -6,9 +6,9 @@ Requires:       %{name}-data
 
 Group:          System Environment/Libraries
 License:        MIT
-URL:            http://linuxwacom.sourceforge.net
+URL:            https://github.com/linuxwacom/libwacom
 
-Source0:        http://prdownloads.sourceforge.net/linuxwacom/%{name}/%{name}-%{version}.tar.bz2
+Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
 
 BuildRequires:  autoconf automake libtool doxygen
 BuildRequires:  glib2-devel libgudev1-devel
@@ -82,6 +82,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Mar 07 2018 Peter Hutterer <peter.hutterer@redhat.com>
+- Switch URLs to github
+
 * Mon Mar 05 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.29-1
 - libwacom 0.29
 
