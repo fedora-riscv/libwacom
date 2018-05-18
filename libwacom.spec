@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        0.29
+Version:        0.30
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -82,6 +82,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri May 18 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.30-1
+- libwacom 0.30
+
 * Wed Mar 07 2018 Peter Hutterer <peter.hutterer@redhat.com>
 - Switch URLs to github
 
