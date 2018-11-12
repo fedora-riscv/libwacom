@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.32
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -63,7 +63,6 @@ make %{?_smp_mflags} check
 %license COPYING
 %doc README
 %{_libdir}/libwacom.so.*
-%{_udevrulesdir}/65-libwacom.rules
 %{_bindir}/libwacom-list-local-devices
 %{_mandir}/man1/libwacom-list-local-devices.1*
 
@@ -76,6 +75,7 @@ make %{?_smp_mflags} check
 
 %files data
 %doc COPYING
+%{_udevrulesdir}/65-libwacom.rules
 %dir %{_datadir}/libwacom
 %{_datadir}/libwacom/*.tablet
 %{_datadir}/libwacom/*.stylus
@@ -83,6 +83,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Nov 12 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.32-2
+- Move the udev rule to the noarch libwacom-data package (#1648743)
+
 * Mon Nov 05 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.32-1
 - libwacom 0.32
 
