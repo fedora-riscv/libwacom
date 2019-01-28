@@ -4,7 +4,6 @@ Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
-Group:          System Environment/Libraries
 License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
