@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        0.32
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -82,6 +82,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.32-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Mon Nov 12 2018 Peter Hutterer <peter.hutterer@redhat.com> 0.32-2
 - Move the udev rule to the noarch libwacom-data package (#1648743)
 
