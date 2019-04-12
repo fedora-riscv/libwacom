@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.32
-Release:        3%{?dist}
+Version:        0.33
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -82,6 +82,9 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Apr 12 2019 Peter Hutterer <peter.hutterer@redhat.com> 0.33-1
+- libwacom 0.33
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.32-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
