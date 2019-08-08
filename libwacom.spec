@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        0.33
-Release:        2%{?dist}
+Version:        0.99.901
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -9,10 +9,11 @@ URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
 
-BuildRequires:  autoconf automake libtool doxygen
+BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
 BuildRequires:  systemd systemd-devel
 BuildRequires:  git
+BuildRequires:  libxml2-devel
 
 %description
 %{name} is a library that provides information about Wacom tablets and
@@ -38,23 +39,17 @@ Tablet information client library library data files.
 %autosetup -S git
 
 %build
-autoreconf --force -v --install || exit 1
-%configure --disable-static --disable-silent-rules
-make %{?_smp_mflags}
+%meson -Dtests=true
+%meson_build
 
 %install
-make install DESTDIR=%{buildroot} INSTALL="install -p"
+%meson_install
 install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 # auto-generate the udev rule from the database entries
-pushd tools
-./generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/65-libwacom.rules
-popd
-
-# We intentionally don't ship *.la files
-find %{buildroot} -type f -name "*.la" -delete
+%_vpath_builddir/generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/65-libwacom.rules
 
 %check
-make %{?_smp_mflags} check
+%meson_test
 
 %ldconfig_scriptlets
 
@@ -82,6 +77,10 @@ make %{?_smp_mflags} check
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Aug 08 2019 Peter Hutterer <peter.hutterer@redhat.com> 0.99.901-1
+- libwacom 1.0rc1
+- switch to meson
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.33-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
