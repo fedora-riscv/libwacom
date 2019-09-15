@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        1.0
+Version:        1.1
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -55,7 +55,7 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 
 %files
 %license COPYING
-%doc README
+%doc README.md
 %{_libdir}/libwacom.so.*
 %{_bindir}/libwacom-list-local-devices
 %{_mandir}/man1/libwacom-list-local-devices.1*
@@ -77,6 +77,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Sep 16 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.1-1
+- libwacom 1.1
+
 * Mon Aug 26 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.0-1
 - libwacom 1.0
 
