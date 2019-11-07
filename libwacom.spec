@@ -23,19 +23,19 @@ tools. This information can then be used by drivers or applications to tweak
 the UI or general settings to match the physical tablet.
 
 %package devel
-Summary:        Tablet Information Client Library Library Development Package
+Summary:        Tablet Information Client Library Development Package
 Requires:       %{name} = %{version}-%{release}
 Requires:       pkgconfig
 
 %description devel
-Tablet information client library library development package.
+Tablet information client library development package.
 
 %package data
-Summary:        Tablet Information Client Library Library Data Files
+Summary:        Tablet Information Client Library Data Files
 BuildArch:      noarch
 
 %description data
-Tablet information client library library data files.
+Tablet information client library data files.
 
 %prep
 %autosetup -S git
