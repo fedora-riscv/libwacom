@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -14,6 +14,8 @@ BuildRequires:  glib2-devel libgudev1-devel
 BuildRequires:  systemd systemd-devel
 BuildRequires:  git
 BuildRequires:  libxml2-devel
+
+Requires:       %{name}-data = %{version}-%{release}
 
 %description
 %{name} is a library that provides information about Wacom tablets and
@@ -77,6 +79,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Nov 07 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.1-2
+- Require a libwacom-data package of the same version
+
 * Mon Sep 16 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.1-1
 - libwacom 1.1
 
