@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -41,7 +41,7 @@ Tablet information client library data files.
 %autosetup -S git
 
 %build
-%meson -Dtests=true
+%meson -Dtests=true -Ddocumentation=disabled
 %meson_build
 
 %install
@@ -79,6 +79,10 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Dec 23 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.2-2
+- Disable documentation explicitly. Fedora uses --auto-features=enabled
+  during the build.
+
 * Mon Dec 23 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.2-1
 - libwacom 1.2
 
