@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -79,6 +79,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Mon Dec 23 2019 Peter Hutterer <peter.hutterer@redhat.com> 1.2-2
 - Disable documentation explicitly. Fedora uses --auto-features=enabled
   during the build.
