@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        1.2
-Release:        3%{?dist}
+Version:        1.3
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -41,7 +41,7 @@ Tablet information client library data files.
 %autosetup -S git
 
 %build
-%meson -Dtests=true -Ddocumentation=disabled
+%meson -Dtests=disabled -Ddocumentation=disabled
 %meson_build
 
 %install
@@ -79,6 +79,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Mar 25 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.3-1
+- libwacom 1.3
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
