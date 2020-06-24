@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        1.3
+Version:        1.4
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -8,6 +8,7 @@ License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
+Patch01:        0001-meson.build-ignore-Makefile.in-when-installing-data.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -47,8 +48,6 @@ Tablet information client library data files.
 %install
 %meson_install
 install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
-# auto-generate the udev rule from the database entries
-%_vpath_builddir/generate-udev-rules > ${RPM_BUILD_ROOT}/%{_udevrulesdir}/65-libwacom.rules
 
 %check
 %meson_test
@@ -72,6 +71,7 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %files data
 %doc COPYING
 %{_udevrulesdir}/65-libwacom.rules
+%{_udevhwdbdir}/65-libwacom.hwdb
 %dir %{_datadir}/libwacom
 %{_datadir}/libwacom/*.tablet
 %{_datadir}/libwacom/*.stylus
@@ -79,6 +79,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Jun 24 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.4-1
+- libwacom 1.4
+
 * Wed Mar 25 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.3-1
 - libwacom 1.3
 
