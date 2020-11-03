@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        1.5
+Version:        1.6
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -78,6 +78,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Nov 03 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.6-1
+- libwacom 1.6
+
 * Mon Aug 31 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.5-1
 - libwacom 1.5
 
