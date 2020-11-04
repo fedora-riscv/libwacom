@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -12,7 +12,7 @@ Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
 BuildRequires:  systemd systemd-devel
-BuildRequires:  git
+BuildRequires:  git-core
 BuildRequires:  libxml2-devel
 
 Requires:       %{name}-data = %{version}-%{release}
@@ -78,6 +78,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Nov 04 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.6-2
+- Change BuildRequires to git-core, we don't need full git
+
 * Tue Nov 03 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.6-1
 - libwacom 1.6
 
