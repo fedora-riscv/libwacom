@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        1.6
-Release:        2%{?dist}
+Version:        1.7
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -8,6 +8,8 @@ License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
+
+Patch01:	0001-meson.build-fix-typo-causing-the-data-file-test-to-b.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -78,6 +80,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Dec 17 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.7-1
+- libwacom 1.7
+
 * Wed Nov 04 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.6-2
 - Change BuildRequires to git-core, we don't need full git
 
