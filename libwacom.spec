@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -10,6 +10,7 @@ URL:            https://github.com/linuxwacom/libwacom
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
 
 Patch01:	0001-meson.build-fix-typo-causing-the-data-file-test-to-b.patch
+Patch02:	0001-data-Add-ISDv4-51e9-Lenovo-ThinkPad-P15-Gen-1-325.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -80,6 +81,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Jan 14 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.7-2
+- Add tablet file for Lenovo ThinkPad P15 (#1914409)
+
 * Thu Dec 17 2020 Peter Hutterer <peter.hutterer@redhat.com> 1.7-1
 - libwacom 1.7
 
