@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -81,6 +81,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.7-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Thu Jan 14 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.7-2
 - Add tablet file for Lenovo ThinkPad P15 (#1914409)
 
