@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        1.7
-Release:        3%{?dist}
+Version:        1.8
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -8,9 +8,6 @@ License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
-
-Patch01:	0001-meson.build-fix-typo-causing-the-data-file-test-to-b.patch
-Patch02:	0001-data-Add-ISDv4-51e9-Lenovo-ThinkPad-P15-Gen-1-325.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -81,6 +78,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Fri Jan 29 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.8-1
+- libwacom 1.8
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
