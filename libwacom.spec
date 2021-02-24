@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        1.8
-Release:        2%{?dist}
+Version:        1.9
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -8,7 +8,6 @@ License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
-Patch01:	0001-data-Add-ISDv4-528e-Lenovo-Yoga-6-13ARE05-346.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -59,6 +58,8 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %doc README.md
 %{_libdir}/libwacom.so.*
 %{_bindir}/libwacom-list-local-devices
+%{_bindir}/libwacom-show-stylus
+
 %{_mandir}/man1/libwacom-list-local-devices.1*
 
 %files devel
@@ -79,6 +80,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Wed Feb 24 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.9-1
+- libwacom 1.9
+
 * Tue Feb 09 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.8-2
 - Add tablet file for Lenovo Yoga 6
 
