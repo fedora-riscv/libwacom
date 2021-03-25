@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        1.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -8,6 +8,7 @@ License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
 Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
+Patch01:	0001-data-Add-multiple-Lenovo-ThinkPad-X1-Yoga-Gen-6-PIDs.patch
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -80,6 +81,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Thu Mar 25 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.9-2
+- Add X1 Yoga6 data files (#1940872)
+
 * Wed Feb 24 2021 Peter Hutterer <peter.hutterer@redhat.com> 1.9-1
 - libwacom 1.9
 
