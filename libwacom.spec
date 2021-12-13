@@ -1,5 +1,5 @@
 Name:           libwacom
-Version:        1.12
+Version:        1.99.1
 Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
@@ -7,7 +7,7 @@ Requires:       %{name}-data
 License:        MIT
 URL:            https://github.com/linuxwacom/libwacom
 
-Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
+Source0:        https://github.com/linuxwacom/libwacom/releases/download/%{name}-%{version}/%{name}-%{version}.tar.xz
 
 BuildRequires:  meson gcc
 BuildRequires:  glib2-devel libgudev1-devel
@@ -83,6 +83,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_datadir}/libwacom/layouts/*.svg
 
 %changelog
+* Mon Dec 13 2021 Peter Hutterer <peter.hutterer@redhat.com> - 1.99.1-1
+- libwacom 1.99.1
+
 * Wed Sep 01 2021 Peter Hutterer <peter.hutterer@redhat.com> - 1.12-1
 - libwacom 1.12
 
