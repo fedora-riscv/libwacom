@@ -1,6 +1,6 @@
 Name:           libwacom
 Version:        2.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -37,6 +37,14 @@ BuildArch:      noarch
 %description data
 Tablet information client library data files.
 
+%package utils
+Summary:        Tablet Information Client Library Utilities Package
+Requires:       %{name} = %{version}-%{release}
+Requires:       python3-libevdev python3-pyudev
+
+%description utils
+Utilities to handle and/or debug libwacom devices.
+
 %prep
 %autosetup -S git
 
@@ -57,12 +65,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %license COPYING
 %doc README.md
 %{_libdir}/libwacom.so.*
-%{_bindir}/libwacom-list-devices
 %{_bindir}/libwacom-list-local-devices
-%{_bindir}/libwacom-show-stylus
 %{_bindir}/libwacom-update-db
 
-%{_mandir}/man1/libwacom-list-devices.1*
 %{_mandir}/man1/libwacom-list-local-devices.1*
 
 %files devel
@@ -82,7 +87,18 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %dir %{_datadir}/libwacom/layouts
 %{_datadir}/libwacom/layouts/*.svg
 
+%files utils
+%{_bindir}/libwacom-list-devices
+%{_bindir}/libwacom-show-stylus
+%{_mandir}/man1/libwacom-list-devices.1*
+
 %changelog
+* Mon Jan 31 2022 Peter Hutterer <peter.hutterer@redhat.com> - 2.0.0-3
+- Split utilities into a separate package (#2047568)
+  libwacom-list-local-devices is the most commonly used one so let's leave
+  that in the main package, the others are for debugging so let's move them
+  out.
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
