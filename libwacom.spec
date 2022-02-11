@@ -1,6 +1,6 @@
 Name:           libwacom
-Version:        2.0.0
-Release:        3%{?dist}
+Version:        2.1.0
+Release:        1%{?dist}
 Summary:        Tablet Information Client Library
 Requires:       %{name}-data
 
@@ -93,6 +93,9 @@ install -d ${RPM_BUILD_ROOT}/%{_udevrulesdir}
 %{_mandir}/man1/libwacom-list-devices.1*
 
 %changelog
+* Fri Feb 11 2022 Peter Hutterer <peter.hutterer@redhat.com> - 2.1.0-1
+- libwacom 2.1.0
+
 * Mon Jan 31 2022 Peter Hutterer <peter.hutterer@redhat.com> - 2.0.0-3
 - Split utilities into a separate package (#2047568)
   libwacom-list-local-devices is the most commonly used one so let's leave
